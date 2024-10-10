@@ -1,0 +1,70 @@
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=practice_architecture
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - postgres-db:/data/postgres
+    ports:
+      - "5434:5432"
+    networks:
+      - practice-architecture
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+  
+  migrate:
+    image: migrate/migrate
+    command: [
+      "-path", "/migrations",
+      "-database", "postgres://postgres:root@postgres-db:5432/practice_architecture?sslmode=disable",
+      "up"
+    ]
+    volumes:
+      - ./migrations:/migrations
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - practice-architecture
+  
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongodb-db:/data/mongodb
+    ports:
+      - "27018:27017"
+    networks:
+      - practice-architecture
+    restart: unless-stopped
+
+  
+  practice-architecture:
+    build: .
+    container_name: practice
+    depends_on:
+      - migrate
+      - postgres-db
+      - mongodb
+    ports:
+      - "8080:8080"
+    networks:
+      - practice-architecture
+  
+networks:
+  practice-architecture:
+    external: true
+    name: practice-architecture
+    driver: bridge
+
+volumes:
+  postgres-db:
+  mongodb-db:

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(50) NOT NULL,
+    age INT NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    is_deleted BOOLEAN DEFAULT FALSE
+);

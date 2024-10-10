@@ -1,0 +1,332 @@
+basePath: /
+definitions:
+  computer.Computer:
+    properties:
+      _id:
+        type: string
+      cpu:
+        type: string
+      gpu:
+        type: string
+      hdd:
+        type: string
+      ip:
+        type: string
+      isDeleted:
+        type: boolean
+      manufacturer:
+        type: string
+      os:
+        type: string
+      ram:
+        type: string
+    type: object
+  handler.ComputerReq:
+    properties:
+      cpu:
+        type: string
+      gpu:
+        type: string
+      hdd:
+        type: string
+      ip:
+        type: string
+      manufacturer:
+        type: string
+      os:
+        type: string
+      ram:
+        type: string
+    type: object
+  handler.UserReq:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      name:
+        type: string
+    type: object
+  responder.Response:
+    properties:
+      code:
+        type: integer
+      contentType:
+        type: string
+      payload: {}
+    type: object
+  user.User:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      id:
+        type: string
+      isDeleted:
+        type: boolean
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Practice API
+  title: Practice
+  version: "1.0"
+paths:
+  /computer:
+    get:
+      description: Returns a list of computer instances
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/computer.Computer'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer list
+      tags:
+      - Computer
+    post:
+      consumes:
+      - application/json
+      description: Adds a new computer instance
+      parameters:
+      - description: Computer object
+        in: body
+        name: computer
+        required: true
+        schema:
+          $ref: '#/definitions/handler.ComputerReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/computer.Computer'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer creation
+      tags:
+      - Computer
+  /computer/{id}:
+    delete:
+      description: Deletes a computer instance
+      parameters:
+      - description: Computer ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer deletion
+      tags:
+      - Computer
+    get:
+      description: Returns a computer instance
+      parameters:
+      - description: Computer ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/computer.Computer'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer reading
+      tags:
+      - Computer
+    put:
+      consumes:
+      - application/json
+      description: Updates a computer instance
+      parameters:
+      - description: Computer ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Computer object
+        in: body
+        name: computer
+        required: true
+        schema:
+          $ref: '#/definitions/handler.ComputerReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/computer.Computer'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer update
+      tags:
+      - Computer
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new user instance
+      parameters:
+      - description: User object
+        in: body
+        name: userData
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserReq'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/user.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User creataion
+      tags:
+      - User
+  /user/{id}:
+    delete:
+      description: Deletes a user instance
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User deletion
+      tags:
+      - User
+    get:
+      description: Returns a user instance
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User reading
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Updates a user instance
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User object
+        in: body
+        name: userData
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User update
+      tags:
+      - User
+swagger: "2.0"
