@@ -59,6 +59,8 @@ func (r *Postgres) onStart(ctx context.Context) error {
 		return errors.Wrap(err, "error while pinging postgres")
 	}
 
+	db.
+
 	r.DB = db
 
 	r.Logger.Info("connected to postgres")

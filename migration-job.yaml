@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: migratedb
+  name: migrate-db
 spec:
   template:
     metadata:
@@ -16,7 +16,7 @@ spec:
           - "-path"
           - "/migrations"
           - "-database"
-          - "postgres://postgres:root@postgresdb:5432/practice_architecture?sslmode=disable"
+          - "postgres://postgres:root@postgres-db:5432/practice_architecture?sslmode=disable"
           - "up"
         volumeMounts:
         - name: migrations
