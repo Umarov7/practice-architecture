@@ -2,7 +2,6 @@ package router
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"net/http"
 	"practice/internal/controller/http/handler"
@@ -48,7 +47,7 @@ func New(opts Options) {
 	})
 
 	server := http.Server{
-		Addr:         fmt.Sprint(opts.Config.ADDRESS),
+		Addr:         opts.Config.ADDRESS,
 		Handler:      router,
 		ReadTimeout:  opts.Config.ReadTimeout,
 		WriteTimeout: opts.Config.WriteTimeout,

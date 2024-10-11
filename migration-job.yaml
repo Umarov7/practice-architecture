@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migratedb
+spec:
+  template:
+    metadata:
+      name: migrate-db
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: migrate
+        image: migrate/migrate
+        command: ["/migrate"]
+        args: 
+          - "-path"
+          - "/migrations"
+          - "-database"
+          - "postgres://postgres:root@postgresdb:5432/practice_architecture?sslmode=disable"
+          - "up"
+        volumeMounts:
+        - name: migrations
+          mountPath: /migrations
+      volumes:
+      - name: migrations
+        hostPath:
+          path: /home/ibrohim/Uzinfocom/practice-architecture/migrations
+          type: Directory

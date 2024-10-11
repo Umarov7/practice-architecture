@@ -9,7 +9,7 @@ import (
 // @title Practice
 // @version 1.0
 // @description Practice API
-// @host localhost:8080
+// @host 192.168.49.2:31532
 // @BasePath  /
 func main() {
 	app.New(pkg.Module).Run()

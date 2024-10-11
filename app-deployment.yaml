@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: practice-architecture
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: practice-architecture
+  template:
+    metadata:
+      labels:
+        app: practice-architecture
+    spec:
+      containers:
+      - name: practice-architecture
+        image: practice-architecture:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POSTGRES_HOST
+          value: postgres-db
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: root
+        - name: POSTGRES_DB
+          value: practice_architecture
+        - name: MONGO_HOST
+          value: mongodb
+        - name: MONGO_PORT
+          value: "27017"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: practice-architecture
+spec:
+  selector:
+    app: practice-architecture
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: NodePort
