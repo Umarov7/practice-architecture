@@ -20,7 +20,7 @@ import (
 // @Accept			json
 // @Produce			json
 // @Param computer body ComputerReq true "Computer object"
-// @Success 200 {object} computer.Computer
+// @Success 201 {object} computer.Computer
 // @Failure 400 {object} responder.Response
 // @Failure 500 {object} responder.Response
 func (h *Handler) CreateComputer(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +56,7 @@ func (h *Handler) CreateComputer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.Code = http.StatusOK
+	response.Code = http.StatusCreated
 	response.Payload = res
 	response.ContentType = "application/json"
 }

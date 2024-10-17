@@ -2,6 +2,7 @@ package app
 
 import (
 	"practice/internal/controller"
+	"practice/internal/rabbitmq"
 	"practice/internal/repository"
 	"practice/internal/service"
 
@@ -14,5 +15,6 @@ func New(opt fx.Option) *fx.App {
 		repository.Module,
 		service.Module,
 		controller.Module,
+		rabbitmq.Module,
 	)
 }

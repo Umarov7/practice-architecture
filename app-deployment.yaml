@@ -33,6 +33,10 @@ spec:
           value: mongodb
         - name: MONGO_PORT
           value: "27017"
+        - name: KAFKA_HOST
+          value: "kafka"
+        - name: KAFKA_PORT
+          value: "9092"
         resources:
           requests:
             cpu: 100m

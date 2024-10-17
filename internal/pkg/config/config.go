@@ -28,6 +28,24 @@ type Config struct {
 	MongoDB_URI        string
 	MongoDB_NAME       string
 	MongoDB_COLLECTION string
+
+	// Kafka
+	KAFKA_ADDRESS                string
+	KAFKA_TOPIC_USER_CREATED     string
+	KAFKA_TOPIC_USER_UPDATED     string
+	KAFKA_TOPIC_USER_DELETED     string
+	KAFKA_TOPIC_COMPUTER_CREATED string
+	KAFKA_TOPIC_COMPUTER_UPDATED string
+	KAFKA_TOPIC_COMPUTER_DELETED string
+
+	// RabbitMQ
+	RabbitMQ_ADDRESS                string
+	RabbitMQ_QUEUE_USER_CREATED     string
+	RabbitMQ_QUEUE_USER_UPDATED     string
+	RabbitMQ_QUEUE_USER_DELETED     string
+	RabbitMQ_QUEUE_COMPUTER_CREATED string
+	RabbitMQ_QUEUE_COMPUTER_UPDATED string
+	RabbitMQ_QUEUE_COMPUTER_DELETED string
 }
 
 func Load() *Config {
@@ -57,6 +75,24 @@ func Load() *Config {
 		MongoDB_URI:        cast.ToString(coalesce("MONGO_DB_URI", "")),
 		MongoDB_NAME:       cast.ToString(coalesce("MONGO_DB_NAME", "")),
 		MongoDB_COLLECTION: cast.ToString(coalesce("MONGO_DB_COLLECTION", "")),
+
+		// Kafka
+		KAFKA_ADDRESS:                cast.ToString(coalesce("KAFKA_ADDRESS", "localhost:9092")),
+		KAFKA_TOPIC_USER_CREATED:     cast.ToString(coalesce("KAFKA_TOPIC_USER_CREATED", "USER_CREATED")),
+		KAFKA_TOPIC_USER_UPDATED:     cast.ToString(coalesce("KAFKA_TOPIC_USER_UPDATED", "USER_UPDATED")),
+		KAFKA_TOPIC_USER_DELETED:     cast.ToString(coalesce("KAFKA_TOPIC_USER_DELETED", "USER_DELETED")),
+		KAFKA_TOPIC_COMPUTER_CREATED: cast.ToString(coalesce("KAFKA_TOPIC_COMPUTER_CREATED", "COMPUTER_CREATED")),
+		KAFKA_TOPIC_COMPUTER_UPDATED: cast.ToString(coalesce("KAFKA_TOPIC_COMPUTER_UPDATED", "COMPUTER_UPDATED")),
+		KAFKA_TOPIC_COMPUTER_DELETED: cast.ToString(coalesce("KAFKA_TOPIC_COMPUTER_DELETED", "COMPUTER_DELETED")),
+
+		// RabbitMQ
+		RabbitMQ_ADDRESS:                cast.ToString(coalesce("RabbitMQ_ADDRESS", "amqp://guest:guest@localhost:5672")),
+		RabbitMQ_QUEUE_USER_CREATED:     cast.ToString(coalesce("RabbitMQ_QUEUE_USER_CREATED", "USER_CREATED")),
+		RabbitMQ_QUEUE_USER_UPDATED:     cast.ToString(coalesce("RabbitMQ_QUEUE_USER_UPDATED", "USER_UPDATED")),
+		RabbitMQ_QUEUE_USER_DELETED:     cast.ToString(coalesce("RabbitMQ_QUEUE_USER_DELETED", "USER_DELETED")),
+		RabbitMQ_QUEUE_COMPUTER_CREATED: cast.ToString(coalesce("RabbitMQ_QUEUE_COMPUTER_CREATED", "COMPUTER_CREATED")),
+		RabbitMQ_QUEUE_COMPUTER_UPDATED: cast.ToString(coalesce("RabbitMQ_QUEUE_COMPUTER_UPDATED", "COMPUTER_UPDATED")),
+		RabbitMQ_QUEUE_COMPUTER_DELETED: cast.ToString(coalesce("RabbitMQ_QUEUE_COMPUTER_DELETED", "COMPUTER_DELETED")),
 	}
 }
 

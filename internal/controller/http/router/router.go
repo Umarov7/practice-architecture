@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"practice/internal/controller/http/handler"
 	"practice/internal/pkg/config"
-	"strings"
 
 	swagger "github.com/swaggo/http-swagger/v2"
 
@@ -36,6 +35,14 @@ func New(opts Options) {
 		r.Post("/", opts.Handler.CreateUser)
 		r.Put("/{id}", opts.Handler.UpdateUser)
 		r.Delete("/{id}", opts.Handler.DeleteUser)
+		// Kafka
+		r.Post("/kafka", opts.Handler.CreateUserKafka)
+		r.Put("/kafka/{id}", opts.Handler.UpdateUserKafka)
+		r.Delete("/kafka/{id}", opts.Handler.DeleteUserKafka)
+		// RabbitMQ
+		r.Post("/rabbit", opts.Handler.CreateUserRabbit)
+		r.Put("/rabbit/{id}", opts.Handler.UpdateUserRabbit)
+		r.Delete("/rabbit/{id}", opts.Handler.DeleteUserRabbit)
 	})
 
 	router.Route("/computer", func(r chi.Router) {
@@ -44,6 +51,14 @@ func New(opts Options) {
 		r.Put("/{id}", opts.Handler.UpdateComputer)
 		r.Delete("/{id}", opts.Handler.DeleteComputer)
 		r.Get("/", opts.Handler.ListComputers)
+		// Kafka
+		r.Post("/kafka", opts.Handler.CreateComputerKafka)
+		r.Put("/kafka/{id}", opts.Handler.UpdateComputerKafka)
+		r.Delete("/kafka/{id}", opts.Handler.DeleteComputerKafka)
+		// RabbitMQ
+		r.Post("/rabbit", opts.Handler.CreateComputerRabbit)
+		r.Put("/rabbit/{id}", opts.Handler.UpdateComputerRabbit)
+		r.Delete("/rabbit/{id}", opts.Handler.DeleteComputerRabbit)
 	})
 
 	server := http.Server{
@@ -78,18 +93,5 @@ func onStop(srv *http.Server, log *slog.Logger) func(_ context.Context) error {
 			log.Error("server forced to shutdown: %v", err)
 		}
 		return nil
-	}
-}
-
-func displayRoutes(r *chi.Mux, l *slog.Logger) {
-	routes := r.Routes()
-	for _, route := range routes {
-		if strings.Contains(route.Pattern, "/docs") {
-			continue
-		}
-
-		for handle := range route.Handlers {
-			l.Debug("http controller. mapped [%v] %v route", handle, route.Pattern)
-		}
 	}
 }

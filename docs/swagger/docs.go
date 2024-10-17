@@ -70,10 +70,268 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/computer.Computer"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/computer/kafka": {
+            "post": {
+                "description": "Creates a computer instance via kafka",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Kafka"
+                ],
+                "summary": "Computer creation through kafka",
+                "parameters": [
+                    {
+                        "description": "Computer object",
+                        "name": "computer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.ComputerReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/computer/kafka/{id}": {
+            "put": {
+                "description": "Updates a computer instance via kafka",
+                "tags": [
+                    "Kafka"
+                ],
+                "summary": "Computer update through kafka",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Computer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Computer object",
+                        "name": "computer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.ComputerReq"
+                        }
+                    }
+                ],
+                "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/computer.Computer"
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes a computer instance via kafka",
+                "tags": [
+                    "Kafka"
+                ],
+                "summary": "Computer deletion through kafka",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Computer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/computer/rabbit": {
+            "post": {
+                "description": "Creates a computer instance via RabbitMQ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "RabbitMQ"
+                ],
+                "summary": "Computer creation through RabbitMQ",
+                "parameters": [
+                    {
+                        "description": "Computer object",
+                        "name": "computer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.ComputerReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/computer/rabbit/{id}": {
+            "put": {
+                "description": "Updates a computer instance via RabbitMQ",
+                "tags": [
+                    "RabbitMQ"
+                ],
+                "summary": "Computer update through RabbitMQ",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Computer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Computer object",
+                        "name": "computer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.ComputerReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes a computer instance via RabbitMQ",
+                "tags": [
+                    "RabbitMQ"
+                ],
+                "summary": "Computer deletion through RabbitMQ",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Computer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
                         }
                     },
                     "400": {
@@ -251,6 +509,264 @@ const docTemplate = `{
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/user.User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/kafka": {
+            "post": {
+                "description": "Adds a new user instance via kafka",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Kafka"
+                ],
+                "summary": "User creation through kafka",
+                "parameters": [
+                    {
+                        "description": "User object",
+                        "name": "userData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UserReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/kafka/{id}": {
+            "put": {
+                "description": "Updates a user instance via kafka",
+                "tags": [
+                    "Kafka"
+                ],
+                "summary": "User update through kafka",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "User object",
+                        "name": "userData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UserReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes a user instance via kafka",
+                "tags": [
+                    "Kafka"
+                ],
+                "summary": "User deletion through kafka",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/rabbit": {
+            "post": {
+                "description": "Adds a new user instance via RabbitMQ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "RabbitMQ"
+                ],
+                "summary": "User creation through RabbitMQ",
+                "parameters": [
+                    {
+                        "description": "User object",
+                        "name": "userData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UserReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/rabbit/{id}": {
+            "put": {
+                "description": "Updates a user instance via RabbitMQ",
+                "tags": [
+                    "RabbitMQ"
+                ],
+                "summary": "User update through RabbitMQ",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "User object",
+                        "name": "userData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UserReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes a user instance via RabbitMQ",
+                "tags": [
+                    "RabbitMQ"
+                ],
+                "summary": "User deletion through RabbitMQ",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responder.Response"
                         }
                     },
                     "400": {

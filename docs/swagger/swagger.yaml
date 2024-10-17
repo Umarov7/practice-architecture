@@ -110,8 +110,8 @@ paths:
       produces:
       - application/json
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           schema:
             $ref: '#/definitions/computer.Computer'
         "400":
@@ -212,6 +212,176 @@ paths:
       summary: Computer update
       tags:
       - Computer
+  /computer/kafka:
+    post:
+      consumes:
+      - application/json
+      description: Creates a computer instance via kafka
+      parameters:
+      - description: Computer object
+        in: body
+        name: computer
+        required: true
+        schema:
+          $ref: '#/definitions/handler.ComputerReq'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer creation through kafka
+      tags:
+      - Kafka
+  /computer/kafka/{id}:
+    delete:
+      description: Deletes a computer instance via kafka
+      parameters:
+      - description: Computer ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer deletion through kafka
+      tags:
+      - Kafka
+    put:
+      description: Updates a computer instance via kafka
+      parameters:
+      - description: Computer ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Computer object
+        in: body
+        name: computer
+        required: true
+        schema:
+          $ref: '#/definitions/handler.ComputerReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer update through kafka
+      tags:
+      - Kafka
+  /computer/rabbit:
+    post:
+      consumes:
+      - application/json
+      description: Creates a computer instance via RabbitMQ
+      parameters:
+      - description: Computer object
+        in: body
+        name: computer
+        required: true
+        schema:
+          $ref: '#/definitions/handler.ComputerReq'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer creation through RabbitMQ
+      tags:
+      - RabbitMQ
+  /computer/rabbit/{id}:
+    delete:
+      description: Deletes a computer instance via RabbitMQ
+      parameters:
+      - description: Computer ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer deletion through RabbitMQ
+      tags:
+      - RabbitMQ
+    put:
+      description: Updates a computer instance via RabbitMQ
+      parameters:
+      - description: Computer ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Computer object
+        in: body
+        name: computer
+        required: true
+        schema:
+          $ref: '#/definitions/handler.ComputerReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Computer update through RabbitMQ
+      tags:
+      - RabbitMQ
   /user:
     post:
       consumes:
@@ -329,4 +499,174 @@ paths:
       summary: User update
       tags:
       - User
+  /user/kafka:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new user instance via kafka
+      parameters:
+      - description: User object
+        in: body
+        name: userData
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserReq'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User creation through kafka
+      tags:
+      - Kafka
+  /user/kafka/{id}:
+    delete:
+      description: Deletes a user instance via kafka
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User deletion through kafka
+      tags:
+      - Kafka
+    put:
+      description: Updates a user instance via kafka
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User object
+        in: body
+        name: userData
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User update through kafka
+      tags:
+      - Kafka
+  /user/rabbit:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new user instance via RabbitMQ
+      parameters:
+      - description: User object
+        in: body
+        name: userData
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserReq'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User creation through RabbitMQ
+      tags:
+      - RabbitMQ
+  /user/rabbit/{id}:
+    delete:
+      description: Deletes a user instance via RabbitMQ
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User deletion through RabbitMQ
+      tags:
+      - RabbitMQ
+    put:
+      description: Updates a user instance via RabbitMQ
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User object
+        in: body
+        name: userData
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UserReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: User update through RabbitMQ
+      tags:
+      - RabbitMQ
 swagger: "2.0"
